@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "job_board_epitech",
+    "host": "localhost",
+    "dialect": "mysql"
+  }
+}

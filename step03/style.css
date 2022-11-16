@@ -1,0 +1,130 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    gap: 20px;
+}
+.annoncesContainer{
+    overflow: hidden;
+    overflow-y: scroll;
+    gap: 10px;
+    margin: 20px 0 20px 0;
+    width:40%;
+    height: 90%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.annoncesContainer::-webkit-scrollbar {
+    display: none;
+}
+.annonce{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    height: 250px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.headAnnonce{
+    display: flex;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    height: 15vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.descriptionAnnonce{
+    padding: 3px;
+    border-radius: 5px 5px 0 0;
+    padding-top: 8px;
+    width: 95%;
+    max-height: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: auto;
+}
+.btnContainer{
+    width: 100%;
+    height: 5vh;
+}
+.btnMoreInfo{
+    margin: 10px;
+    float: right;
+    border: solid 1px transparent;
+    border-radius: 5px;
+    /* background-color: rgb(51, 201, 53); */
+    width: 70px;
+}
+.btnMoreInfo:hover{
+    background-color: mediumseagreen;
+}
+h1{
+    width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+aside{
+    visibility: hidden;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin: 20px 0 20px 0;
+    position: relative;
+    width: 40%;
+    height: 90%;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    animation: apparition 2s ease;
+    transition: all 2s ease;
+}
+aside::-webkit-scrollbar {
+    display: none;
+}
+
+#headGlobalAnnonce{
+    padding: 5px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+    box-shadow: 1px 1px 1px lightgray;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    height: 30%;
+    justify-content: space-evenly;
+}
+.descriptionGlobalAnnonce{
+    padding: 5px;
+}
+.descriptionGlobalAnnonce > * {
+    padding: 10px 0;
+}
+.descriptionGlobalAnnonce > ul {
+    padding-left: 50px;
+    list-style: none;
+}
+.container{
+    border: solid 1px lightgray;
+    border-radius: 5px;
+}
+
+/* Anime */
+
+@keyframes apparition {
+    0%{opacity: 0;}
+    50%{opacity: 0;}
+    100%{opacity: 100;}
+}

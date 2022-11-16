@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company</title>
+  <link rel="stylesheet" href="../style/style.css" />
+  <script src="../../../MeavillaSpecialScript.js"></script>
+</head>
+
+<body>
+  <header>
+    <div>    <a href="../views/index.html">Retour</a>
+    </div>
+    <div id="user">
+    </div>
+    <div id="logSignIn">
+      <a href="./connection.html?index=1">Login</a> | <a href="./connection.html?index=0">Sign up</a>
+    </div>
+  </header>
+  <main>
+    <section class="annoncesContainer">
+    </section>
+    <aside id="userMessage">
+    </aside>
+  </main>
+  <script>
+    function whoIs() {
+      const locToken = localStorage.getItem('token')
+      if (locToken) {
+        const headers = new Headers()
+
+        const { userId } = JSON.parse(locToken)
+        const { token } = JSON.parse(locToken)
+        headers.append("Authorization", `Bearer ${token}`)
+        headers.append("Content-Type", 'application/json')
+        fetch(`http://localhost:3000/api/user/${userId}`, {
+          method: 'GET',
+          headers
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data)
+            localStorage.setItem('user', JSON.stringify(data))
+            const user = JSON.parse(localStorage.getItem("user"));
+        const userDiv = document.querySelector("#user");
+        const logDiv = document.querySelector("#logSignIn");
+        const linkDiv = document.querySelector("#link");
+        logDiv.innerHTML += `<div>
+        <img class="icon" onClick ='formModif()' src="../img/engrenage.png" alt="icon engrenage">
+      </div>`;
+
+        userDiv.innerHTML += `<h4>${user.firstName}</h4> <h4>${user.lastName}</h4>`;
+        const logSignIn = document.querySelector('#logSignIn')
+      logSignIn.innerHTML = '<a onclick ="logOut()">Log out</a>'
+          })
+          .catch((error) => console.log(error))
+      }
+    }
+    
+    // const aside = document.querySelector('aside')
+    function checkToken() {
+      const locToken = localStorage.getItem('token')
+      const { token } = JSON.parse(locToken)
+      const headers = new Headers()
+      headers.append("Authorization", `Bearer ${token}`)
+      headers.append("Content-Type", 'application/json')
+      return headers
+    }
+    function shallowEqual(object1, object2) {
+  const keys1 = Object.keys(object1);
+  const keys2 = Object.keys(object2);
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+  for (let key of keys1) {
+    if (object1[key] !== object2[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+    function DisplayAdvertisements(id) {
+      document.querySelector('aside').style.visibility = 'visible'
+      document.querySelector('aside').style.opacity = 1
+      document.querySelector('aside').classList.add('active')
+
+      const headers = checkToken()
+      fetch(`http://localhost:3000/api/jobInfo/all/${id}`, {
+        method: 'GET',
+        headers
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          let dataX = data
+          let doublon = []
+          data.forEach(element => {
+            if (!doublon.includes(element.advertisements_ID)) {
+              doublon.push(element.advertisements_ID)
+              let article = ``;
+              article += `<article class="annonce container">`
+              article += `<div class="headAnnonce">`
+
+              for (const key in element.advertisement) {
+                if (Object.hasOwnProperty.call( element.advertisement, key)) {
+                  const el =  element.advertisement[key];
+                  if (key == "skill" || key == "companies_ID" || key == 'id' ||key == 'companies_ID') {
+                  }else if(key == 'jobName'){
+                    article += `<h1>${el}</h1>`
+                  }else if(key == 'description'){
+                    article += `<p>${el}</p>`
+                  }
+                  else{
+                    article += `<i><p>${el}</p></i>`
+                  }
+                }
+              }
+              article += ` 
+                <div class="btnContainer">
+                   <button class="btnMoreInfo" onClick="learnMore(${id}, ${element.advertisements_ID})">Voir réponses</button>
+                 </div>`
+              article += `</article class="annonce container">`
+              article += `</div class="headAnnonce">`
+              document.querySelector('section').innerHTML += article;
+            }
+          });
+        })
+        .catch((error) => console.log(error));
+    }
+    
+    window.addEventListener('load', ()=> {
+      whoIs()
+      const user = JSON.parse(localStorage.getItem('user')) 
+      if (!user || user.role != 1) {
+        window.location.href = 'http://127.0.0.1:5500/step04/frontend/views/index.html'
+      }
+      DisplayAdvertisements(user.companies_ID)
+      document.querySelector('aside').classList.remove('active')
+      }
+    )
+
+
+function learnMore(id , advertisementID) {
+  document.querySelector('aside').style.opacity = 1
+  document.querySelector('aside').classList.add("active")
+  document.querySelector('aside').style.display = "flex"
+  document.querySelector('aside').innerHTML = '';
+  document.querySelector('aside').innerHTML += '<p class="closeModal"  onClick="closeModal()">x</p>'
+
+  const headers = checkToken()
+  fetch(`http://localhost:3000/api/jobInfo/all/${id}`, {
+        method: 'GET',
+        headers
+      })
+        .then((response) => response.json())
+        .then((data) => { 
+          data.forEach(element => {
+            if(element.advertisements_ID == advertisementID){
+              const content =
+                    `<div class="annonce container">
+                        <adress >
+                          <h2>${element.person.firstName}</h2>
+                          <h2>${element.person.lastName}</h2>
+                          <a href="tel:+33${element.person.tel}">0${element.person.tel}</a>
+                          <a href="mailto:${element.person.mail}">${element.person.mail}</a> 
+                          <h5></h5>
+                        </adress>
+                        <div class="descriptionGlobalAnnonce">
+                          <p>${element.message}</p>
+                        </div>
+                      </div>`;
+                document.querySelector('aside').innerHTML += content;
+            }
+         })
+        //  .catch((error) => console.log(error));
+  });
+}
+function logOut() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  window.location.href = 'http://127.0.0.1:5500/step04/frontend/views/index.html'
+}
+function closeModal() {
+  document.querySelector('aside').style.opacity = 0
+  document.querySelector('aside').style.display = 'none'
+  document.querySelector('aside').classList.remove("active")
+}
+let allForm = document.querySelectorAll('form')
+allForm.forEach((element) => {
+  meavillaSpecialVerifForm(element)
+})
+  </script>
+</body>
+
+</html>

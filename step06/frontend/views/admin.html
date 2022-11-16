@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/css-admin.css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="../script/admin.js" defer></script>
+    <!-- <script src="../script/final.js" defer></script> -->
+    <title>jobBoard Admin Session</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1><a href="index.html">JobBoard</a></h1>
+      </div>
+      <div id="user"></div>
+      <div id="link">
+      </div>
+      <div id="logSignIn">
+        <a href="./connection.html?index=1">Login</a> |
+        <a href="./connection.html?index=0">Sign up</a>
+      </div>
+    </header>
+
+    <main>
+      <nav>
+        <ul>
+          <li onclick="user()">user</li>
+          <li onclick="jobinfo()">jobinfo</li>
+          <li onclick="companie()">companies</li>
+          <li onclick="annonce()">annonces</li>
+        </ul>
+      </nav>
+      <table id="allUsers">
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="allJobInfos">
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="allCompanies">
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <table id="allAdvertisements">
+        <thead>
+          <tr></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
+    <footer class="footer-distributed">
+      <div id="content-footer">
+      <div class="linkedin-footer">
+        <a href="https://www.linkedin.com/in/de-fressine-loic-98abb7186/"><i class="icon-linkedin-sign"> Loïc Defressine</i></a>
+        <a href="https://www.linkedin.com/in/dimitri-meavilla-62893b234/"><i class="icon-linkedin-sign"> Dimitri Meavilla</i></a>
+      </div>
+  
+      <div class="footer-left">
+        
+        <p class="footer-links">
+          <a class="link-1" href="#">Home</a>
+          
+          <a href="#">About</a>
+          
+          <a href="#">Faq</a>
+          
+          <a href="#">Contact</a>
+        </p>
+        
+        <p>Create by Dimitri & Loïc &copy; 2022</p>
+      </div>
+      
+      <div class="footer-right">
+        <a href=""><i class="icon-facebook-sign"></i></a>
+        <a href=""><i class="icon-twitter-sign"></i></a>
+        <a href="https://github.com/EpitechMscProPromo2025/T-WEB-501-NCE-5-1-jobboard-loic.defressine"><i class="icon-github-sign"></i></i></a>
+        
+      </div>
+      
+    </div>
+    </footer>
+  </body>
+</html>

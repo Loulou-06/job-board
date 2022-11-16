@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>connection</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../script/final.js" defer></script>
+    <script src="../../../MeavillaSpecialScript.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div id="user">
+        </div>
+        <div>
+            <a href="./index.html">Retour</a>
+        </div>
+    </header>
+    <main>
+        <label class="switch">
+            <input type="checkbox">
+            <span id="slider"></span>
+        </label>
+        <section class="container">
+
+            <div id="connectionContainer">
+                <form class="connection" id="loginForm">
+                    <span>
+                        <label for="emailConnection"> Email : </label>
+                        <input type="email" name="mail" id="emailConnection" required>
+                    </span>
+                    <span>
+                        <label for="passwordConnection"> Password : </label>
+                        <input type="password" name="password" id="passwordConnection" required>
+                    </span>
+                    <div>
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+            <div id="inscriptionContainer">
+                <form class="connection" id="inscription">
+                    <img id="photoInscription" src="../img/jobBg.jpg" alt="We want you">
+                    <span>
+                        <label for="firstNameInscription"> Firstname : </label>
+                        <input type="text" name="firstName" id="firstNameInscription" required>
+                    </span>
+                    <span>
+                        <label for="lastNameInscription"> Lastname : </label>
+                        <input type="text" name="lastName" id="lastNameInscription" required>
+                    </span>
+                    <span>
+                        <label for="emailInscription">Email : </label>
+                        <input type="email" name="mail" id="emailInscription" required>
+                    </span>
+                    <span>
+                        <label for="passwordInscription">Password : </label>
+                        <input type="password" name="password" id="passwordInscription" required>
+                    </span>
+                    <span>
+                        <label for="telInscription">Phone : </label>
+                        <input type="tel" name="tel" id="telInscription" required>
+                    </span>
+                    <label for="roleInscription">Vous êtes ici pour : </label>
+                    <select name="role" id="roleInscription">
+                        <option value="0">Postuler à des annonces</option>
+                        <option value="1">Poster des annonces</option>
+                    </select>
+                    <div id="option2">
+                        <label for="CompanieName">Companie's name : </label>
+                        <input type="text" name="CompanieName" id="CompanieName">
+                        <label for="CompanieAdress">Companie's adress : </label>
+                        <input type="text" name="CompanieAdress" id="CompanieAdress">
+
+                    </div>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
+<style>
+    :root{
+  --link : #70A998;
+  --a : #2D4C43;
+  --background: #70A998;
+  --contrastMedium : #661141;
+  --contrastStrong : #440026;
+}
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 90vh;
+        width: 100%;
+    }
+
+    .inscription {
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        width: 350px;
+        height: 450px;
+        justify-content: space-between
+    }
+
+    section {
+        display: flex;
+        align-items: center;
+    }
+
+    #option2 {
+        visibility: hidden;
+        display: flex;
+        flex-direction: column;
+        border: solid 1px var(--contrastMedium);
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    #option2>input {
+        border: solid 1px transparent;
+        border-radius: 5px;
+        border-bottom: 1px dashed var(--contrastMedium);
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    input[type="submit"] {
+        border: solid 1px var(--contrastMedium);
+         border-radius: 5px;
+        width: 100%;
+        height: 25px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: var(--link);
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 212px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    #slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--background);
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    #slider::before {
+        position: absolute;
+        content: attr(data-content);
+        height: 26px;
+        width: 106px;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+#slider {
+        background-color: var(--contrastMedium);
+    }
+
+    input:focus+#slider {
+        box-shadow: 0 0 1px var(--contrastStrong);
+    }
+
+    input:checked+#slider::before {
+        -webkit-transform: translateX(96px);
+        -ms-transform: translateX(96px);
+        transform: translateX(96px);
+    }
+
+    #photoInscription {
+        position: absolute;
+        object-fit: cover;
+        transition: all 2s;
+        border-radius: 5px;
+    }
+    
+    @media All and (min-width: 320px) and (max-width: 767px) {
+        #photoInscription {
+            display: none;
+
+        }
+        #connectionContainer.active{
+            display: none;
+        }
+        #inscriptionContainer.active{
+            display: none;
+
+        }
+        #connectionContainer , #inscriptionContainer {
+            width: 95%;
+        }
+        .connection{
+            width: 100%;
+        }
+        section{
+            width: 90%;
+        }
+    }
+</style>
+<script>
+    const toggleCheck = document.querySelectorAll('.switch')[0].children[0];
+
+    const slider = document.querySelector('#slider');
+
+    const roleInscription = document.querySelector('#roleInscription')
+    const companieForm = document.querySelector('#option2')
+    const photoInscription = document.querySelector('#photoInscription')
+    const forms = document.querySelectorAll('.connection')
+
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+
+    window.addEventListener('resize', (event) => {
+        imageMovement()
+    });
+
+    function imageMovement() {
+        if (urlParams.get('index') == 0) {
+            toggleCheck.checked = true
+            slider.dataset.content = 'Inscription';
+            photoInscription.style.width = forms[0].clientWidth + "px"
+            photoInscription.style.height = forms[0].clientHeight + "px"
+            photoInscription.style.top = forms[0].offsetTop - 1 + "px"
+            photoInscription.style.left = forms[0].offsetLeft - 1 + "px"
+            document.querySelector('#connectionContainer').classList.add('active')
+            document.querySelector('#inscriptionContainer').classList.remove('active')
+
+        } else {
+            toggleCheck.checked = false
+            slider.dataset.content = 'Connection';
+            photoInscription.style.width = forms[1].clientWidth + "px"
+            photoInscription.style.height = forms[1].clientHeight + "px"
+            photoInscription.style.top = forms[1].offsetTop - 1 + "px"
+            photoInscription.style.left = forms[1].offsetLeft - 1 + "px"
+            document.querySelector('#inscriptionContainer').classList.add('active')
+            document.querySelector('#connectionContainer').classList.remove('active')
+
+        }
+    }
+    imageMovement() 
+
+
+
+    roleInscription.addEventListener('change', () => {
+        if (roleInscription.selectedIndex == 1) {
+            companieForm.style.visibility = "visible"
+            companieForm.children[1].setAttribute('required', true)
+            companieForm.children[3].setAttribute('required', true)
+
+        } else {
+            companieForm.style.visibility = "hidden"
+            companieForm.children[1].removeAttribute('required')
+            companieForm.children[3].removeAttribute('required')
+        }
+    })
+
+    slider.addEventListener("click", () => {
+        if (toggleCheck.checked == true) {
+            slider.dataset.content = 'Connection';
+            photoInscription.style.left = forms[1].offsetLeft + "px"
+            document.querySelector('#inscriptionContainer').classList.add('active')
+            document.querySelector('#connectionContainer').classList.remove('active')
+
+            
+
+        } else {
+            slider.dataset.content = 'Inscription';
+            photoInscription.style.left = forms[0].offsetLeft + "px"
+            
+            document.querySelector('#connectionContainer').classList.add('active')
+            document.querySelector('#inscriptionContainer').classList.remove('active')
+        }
+    })
+
+</script>
